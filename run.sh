@@ -27,9 +27,9 @@ fi
 # Check pip is installed
 if ! type_exists 'pip'; then
   if type_exists 'curl'; then
-    curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python2.7
+    curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | python3
   elif type_exists 'wget' && type_exists 'openssl'; then
-    wget -q -O - https://bootstrap.pypa.io/get-pip.py | sudo python2.7
+    wget -q -O - https://bootstrap.pypa.io/get-pip.py | python3
   else
     error "Please install pip, curl, or wget with openssl"
     exit 1
