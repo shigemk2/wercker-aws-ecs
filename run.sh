@@ -19,8 +19,8 @@ type_exists() {
 }
 
 # Check python is installed
-if ! type_exists 'python2.7'; then
-  error "Please install python 2.7"
+if ! type_exists 'python3'; then
+  error "Please install python 3"
   exit 1
 fi
 
