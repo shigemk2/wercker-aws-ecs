@@ -37,7 +37,7 @@ class ECSService(object):
             raise Exception("Service '%s' is %s in cluster '%s'" % (service, failures[0].get('reason'), cluster))
         return response
 
-    def register_task_definition(self, family, file, volumes, executionRoleArn='', requiresCompatibilities=['EC2']):
+    def register_task_definition(self, family, file, volumes, execution_role_arn='', requires_compatibilities=['EC2']):
         """
         Register the task definition contained in the file
         :param family: the task definition name
@@ -55,11 +55,11 @@ class ECSService(object):
 
 
         if os.path.isfile(volumes) is False:
-            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions, executionRoleArn=executionRoleArn, requiresCompatibilities=requiresCompatibilities)
+            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions, executionRoleArn=execution_role_arn, requiresCompatibilities=requires_compatibilities)
         else:
             with open(volumes, 'r') as content_volumes:
                 container_definitions_volumes = json.loads(content_volumes.read())
-            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions, executionRoleArn=executionRoleArn, requiresCompatibilities=requiresCompatibilities)
+            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions, executionRoleArn=execution_role_arn, requiresCompatibilities=requires_compatibilities)
 
         task_definition = response.get('taskDefinition')
         if task_definition.get('status') is 'INACTIVE':
