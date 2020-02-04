@@ -23,8 +23,6 @@ parser.add_argument('--task-definition-file', dest='task_definition_file', requi
 parser.add_argument('--task-definition-volumes-file', dest='task_definition_volumes_file', required=False)
 parser.add_argument('--cluster-name', dest='cluster_name', required=False)
 parser.add_argument('--service-name', dest='service_name', required=False)
-parser.add_argument('--execution-role-arn', dest='execution_role_arn', required=False)
-parser.add_argument('--requires-compatibilities', dest='requires_compatibilities', required=False)
 args = parser.parse_args()
 
 try:
@@ -36,7 +34,7 @@ try:
 
     # Step: Register New Task Definition
     h1("Step: Register New Task Definition")
-    response = ecs.register_task_definition(family=args.task_definition_name, file=args.task_definition_file, volumes=args.task_definition_volumes_file, execution_role_arn=args.execution_role_arn, requires_compatibilities=args.requires_compatibilities.split(','))
+    response = ecs.register_task_definition(family=args.task_definition_name, file=args.task_definition_file, volumes=args.task_definition_volumes_file)
     task_definition_arn = response.get('taskDefinition').get('taskDefinitionArn')
     success("Registering task definition '%s' succeeded" % task_definition_arn)
 

@@ -92,7 +92,5 @@ else
     --task-definition-name "$WERCKER_AWS_ECS_TASK_DEFINITION_NAME" \
     --task-definition-file "$WERCKER_AWS_ECS_TASK_DEFINITION_FILE" \
     --task-definition-volumes-file "$WERCKER_AWS_ECS_TASK_DEFINITION_VOLUMES_FILE" \
-    --service-name "$WERCKER_AWS_ECS_SERVICE_NAME" \
-    --execution-role-arn "$WERCKER_AWS_ECS_TASK_DEFINITION_NAME" \
-    --requires-compatibilities "$WERCKER_AWS_ECS_TASK_DEFINITION_FILE"
+    --service-name "$WERCKER_AWS_ECS_SERVICE_NAME"
 fi
