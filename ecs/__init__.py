@@ -37,12 +37,14 @@ class ECSService(object):
             raise Exception("Service '%s' is %s in cluster '%s'" % (service, failures[0].get('reason'), cluster))
         return response
 
-    def register_task_definition(self, family, file, volumes):
+    def register_task_definition(self, family, file, volumes, executionRoleArn='', requiresCompatibilities='EC2'):
         """
         Register the task definition contained in the file
         :param family: the task definition name
         :param file: the task definition content file
         :param volumes: the task definition volumes file
+        :param executionRoleArn: the Amazon Resource Name (ARN) of the task execution role that containers in this task can assume
+        :param requiresCompatibilities: the launch type required by the task
         :return: the response or raise an Exception
         """
         if os.path.isfile(file) is False:
@@ -53,11 +55,11 @@ class ECSService(object):
 
 
         if os.path.isfile(volumes) is False:
-            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions)
+            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions, executionRoleArn=executionRoleArn, requiresCompatibilities=requiresCompatibilities)
         else:
             with open(volumes, 'r') as content_volumes:
                 container_definitions_volumes = json.loads(content_volumes.read())
-            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions, volumes=container_definitions_volumes)
+            response = self.client.register_task_definition(family=family, containerDefinitions=container_definitions, executionRoleArn=executionRoleArn, requiresCompatibilities=requiresCompatibilities)
 
         task_definition = response.get('taskDefinition')
         if task_definition.get('status') is 'INACTIVE':
