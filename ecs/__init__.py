@@ -37,7 +37,7 @@ class ECSService(object):
             raise Exception("Service '%s' is %s in cluster '%s'" % (service, failures[0].get('reason'), cluster))
         return response
 
-    def register_task_definition(self, family, file, volumes, executionRoleArn='', requiresCompatibilities='EC2'):
+    def register_task_definition(self, family, file, volumes, executionRoleArn='', requiresCompatibilities=['EC2']):
         """
         Register the task definition contained in the file
         :param family: the task definition name
