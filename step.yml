@@ -1,5 +1,5 @@
 name: aws-ecs
-version: 2.2.20
+version: 2.2.21
 summary: Deploy service to ECS
 tags:
   - aws
